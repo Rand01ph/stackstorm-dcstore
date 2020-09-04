@@ -1,0 +1,20 @@
+---
+  class_name: "DcstoreAppSensor"
+  entry_point: "dcstore_app_sensor.py"
+  description: "监测星火商店应用是否有版本更新"
+  poll_interval: 30
+  trigger_types:
+    -
+      name: "matched_app"
+      description: "匹配的APP"
+      payload_info:
+        - 'Name'
+        - 'Version'
+        - 'Filename'
+        - 'Pkgname'
+        - 'Author'
+        - 'Contributor'
+        - 'Website'
+        - 'Update'
+        - 'Size'
+        - 'More'

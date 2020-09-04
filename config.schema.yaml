@@ -1,0 +1,11 @@
+---
+  category:
+    description: "应用分类"
+    type: "string"
+    required: true
+    secret: false
+  pkgname:
+    description: "应用包名"
+    type: "string"
+    required: true
+    secret: false

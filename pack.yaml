@@ -1,0 +1,16 @@
+---
+# Pack reference. 只能包含小写字母,数字和下划线
+# 这个只在 name 属性有特殊字符时需要
+ref: dcs
+name: StackStorm dcstore
+description: 监测应用是否有更新
+keywords:
+  - example
+  - test
+# 版本号规范 (<major>.<minor>.<patch> e.g. 1.0.0)
+version: 1.0.0
+# 支持的python版本
+python_versions:
+  - "3"
+author: Rand01ph
+email: tanyawei1991@gmail.com
