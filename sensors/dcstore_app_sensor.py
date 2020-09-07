@@ -52,14 +52,14 @@ class DcstoreAppSensor(PollingSensor):
         pass
 
     def _get_last_version(self):
-        if not self._last_version and hasattr(self._sensor_service, "get_value"):
-            self._last_version = self._sensor_service.get_value(name="last_version")
+        if not self._last_version and hasattr(self.sensor_service, "get_value"):
+            self._last_version = self.sensor_service.get_value(name="last_version")
         return self._last_version
 
     def _set_last_version(self, last_version):
         self._last_version = last_version
-        if hasattr(self._sensor_service, "set_value"):
-            self._sensor_service.set_value(name="last_version", value=last_version)
+        if hasattr(self.sensor_service, "set_value"):
+            self.sensor_service.set_value(name="last_version", value=last_version)
 
     def _dispatch_trigger_for_app(self, app):
         trigger = self._trigger_ref
@@ -75,4 +75,5 @@ class DcstoreAppSensor(PollingSensor):
             "Size": app['Size'],
             "More": app['More'],
         }
-        self._sensor_service.dispatch(trigger=trigger, payload=payload)
+        # 核心
+        self.sensor_service.dispatch(trigger=trigger, payload=payload)
