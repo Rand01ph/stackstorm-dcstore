@@ -11,11 +11,11 @@ BASE_URL = "http://dcstore.shenmo.tech/store"
 
 
 class DcstoreAppSensor(PollingSensor):
-    def __init__(self, sensor_service, config):
+    def __init__(self, sensor_service, config=None, poll_interval=None):
         super(DcstoreAppSensor, self).__init__(
-            sensor_service=sensor_service, config=config
+            sensor_service=sensor_service, config=config, poll_interval=poll_interval
         )
-        self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
+        self._logger = self.sensor_service.get_logger(__name__)
         self._trigger_ref = "dcs.matched_app"
 
     def setup(self):
