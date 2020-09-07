@@ -11,6 +11,13 @@ BASE_URL = "http://dcstore.shenmo.tech/store"
 
 
 class DcstoreAppSensor(PollingSensor):
+    def __init__(self, sensor_service, config):
+        super(DcstoreAppSensor, self).__init__(
+            sensor_service=sensor_service, config=config
+        )
+        self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
+        self._trigger_ref = "dcs.matched_app"
+
     def setup(self):
         """
         配置, 只会被执行一次
@@ -30,11 +37,12 @@ class DcstoreAppSensor(PollingSensor):
         """
         app_r = self._s.get(self._app_json)
         app_json = app_r.json()
-        app_version = app_json.get('Version')
+        self._logger.info("DcstoreAppSensor get app_json is %s", app_json)
+        app_version = app_json.get("Version")
         last_version = self._get_last_version()
         if last_version != app_version:
-           self._set_last_version(last_version)
-           self._dispatch_trigger_for_app(app_json)
+            self._set_last_version(last_version)
+            self._dispatch_trigger_for_app(app_json)
 
     def cleanup(self):
         """
@@ -64,16 +72,16 @@ class DcstoreAppSensor(PollingSensor):
     def _dispatch_trigger_for_app(self, app):
         trigger = self._trigger_ref
         payload = {
-            "Name": app['Name'],
-            "Version": app['Version'],
-            "Filename": app['Filename'],
-            "Pkgname": app['Pkgname'],
-            "Author": app['Author'],
-            "Contributor": app['Contributor'],
-            "Website": app['Website'],
-            "Update": app['Update'],
-            "Size": app['Size'],
-            "More": app['More'],
+            "Name": app["Name"],
+            "Version": app["Version"],
+            "Filename": app["Filename"],
+            "Pkgname": app["Pkgname"],
+            "Author": app["Author"],
+            "Contributor": app["Contributor"],
+            "Website": app["Website"],
+            "Update": app["Update"],
+            "Size": app["Size"],
+            "More": app["More"],
         }
         # 核心
         self.sensor_service.dispatch(trigger=trigger, payload=payload)

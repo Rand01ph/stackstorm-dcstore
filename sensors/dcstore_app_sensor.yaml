@@ -7,14 +7,5 @@
     -
       name: "matched_app"
       description: "匹配的APP"
-      payload_info:
-        - 'Name'
-        - 'Version'
-        - 'Filename'
-        - 'Pkgname'
-        - 'Author'
-        - 'Contributor'
-        - 'Website'
-        - 'Update'
-        - 'Size'
-        - 'More'
+      payload_schema:
+        type: "object"
