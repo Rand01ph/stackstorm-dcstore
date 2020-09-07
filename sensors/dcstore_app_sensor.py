@@ -40,6 +40,8 @@ class DcstoreAppSensor(PollingSensor):
         self._logger.info("DcstoreAppSensor get app_json is %s", app_json)
         app_version = app_json.get("Version")
         last_version = self._get_last_version()
+        self._logger.info("DcstoreAppSensor app_version is %s last_version is %s",
+                          app_version, last_version)
         if last_version != app_version:
             self._set_last_version(last_version)
             self._dispatch_trigger_for_app(app_json)
